@@ -172,6 +172,7 @@ public struct PaxId
         _value = value;
     }
 
+    public int Value { get { return _value ?? -1; } }
 
     private readonly int? _value;
 
