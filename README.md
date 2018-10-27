@@ -237,6 +237,37 @@ The introduction of semantic types takes a lot of boiler plate code, that is giv
 ![Snippet demonstration](doc/snippet-demo.gif)
 
 
+## Updated C# 7.3 version
+
+Here is an updated version of the code utilizing C# 7.3 features.
+
+```csharp
+public readonly struct PaxId : IEquatable<PaxId>
+{
+    public PaxId(int value)
+    {
+        if (value < 0)
+            throw new ArgumentException("The value must be larger or equal than 0!", nameof(value));
+
+        _value = value;
+    }
+
+    public static readonly PaxId Default = default(PaxId);
+
+    public int Value => _value ?? -1;
+
+    private readonly int? _value;
+
+    public override bool Equals(object obj) => obj is PaxId paxId && Equals(paxId);
+    public bool Equals(PaxId other) => _value == other._value;
+    public static bool operator ==(PaxId first, PaxId second) => first.Equals(second);
+    public static bool operator !=(PaxId first, PaxId second) => !(first == second);
+
+    public override int GetHashCode() => _value?.GetHashCode() ?? 0;
+    public override string ToString() => Value.ToString();
+}
+```
+
 ## Questions
 
 Got any question? Feel free to send me a message anywhere. I'm happy to help and answer any question.
