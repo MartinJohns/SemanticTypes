@@ -258,7 +258,7 @@ public readonly struct PaxId : IEquatable<PaxId>
 
     private readonly int? _value;
 
-    public override bool Equals(object obj) => obj is PaxId paxId && Equals(paxId);
+    public override bool Equals(object obj) => obj is PaxId && Equals((PaxId)obj);
     public bool Equals(PaxId other) => _value == other._value;
     public static bool operator ==(PaxId first, PaxId second) => first.Equals(second);
     public static bool operator !=(PaxId first, PaxId second) => !(first == second);
